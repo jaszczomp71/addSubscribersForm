@@ -51,9 +51,23 @@ app.post("/", function(req, res){
     } else {
       console.log(response.statusCode);
     }
+    if (error) {
+      res.sendFile(__dirname + "/failure.html");
+    } else {
+      if (response.statusCode === 200) {
+        res.sendFile(__dirname + "/success.html");
+      } else {
+        res.sendFile(__dirname + "/failure.html");
+      }
+    }
   });
 
 
+});
+
+
+app.post("/failure", function(req, res){
+  res.redirect("/");
 });
 
 app.listen(3000, function(){
